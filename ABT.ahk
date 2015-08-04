@@ -8,14 +8,18 @@ Handle := hwnds
 Lure := 9999	; Set max lure
 BT := 0	; Auto boot trhow setting, 1 is on, 0 is off
 Base := getProcessBaseAddress()
-WaterAddress := GetAddressWater(Base,0x00989230)	; Water memory address
-LavaAddress := GetAddressLava(Base,0x00989230)		; Lava memory address
-ChocoAddress := GetAddressChoco(Base,0x00989230)	; Choco memory address
+WaterAddress := GetAddressWater(Base,0x00964DDC)	; Water memory address
+LavaAddress := GetAddressLava(Base,0x00964DDC)		; Lava memory address
+ChocoAddress := GetAddressChoco(Base,0x00964DDC)	; Choco memory address
 
 LureCount := 0	; Used lure count
 Loop %Lure% {	; If still have lure (by counting)
 	LureCount := LureCount +1
 	; Open character panel for anti-idle
+	ControlSend, , {c down}, ahk_pid %pid%
+	Sleep, 86
+	ControlSend, , {c up}, ahk_pid %pid%
+	Sleep, 86
 	ControlSend, , {c down}, ahk_pid %pid%
 	Sleep, 86
 	ControlSend, , {c up}, ahk_pid %pid%
