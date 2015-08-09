@@ -1,3 +1,5 @@
+> _[中文說明在文章後面](https://github.com/howar31/Trove-AHK-AutoFish#trove-ahk-autofish-1)_
+
 # Trove-AHK-AutoFish
 This is an AutoHotKey script for auto fishing in Trove.
 
