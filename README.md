@@ -19,7 +19,7 @@ This is an AutoHotKey script for auto fishing in Trove.
 
 2. Download files from this repo.
 > You may find the **Download ZIP** button on the repo page.  Extract the .zip file and you can find the files below.
- * **AutoFish.ahk**
+ * **TroveAutoFish.ahk**
  > This is the main AHK script file.
 
  * **boot.bmp**
@@ -29,7 +29,7 @@ This is an AutoHotKey script for auto fishing in Trove.
  > This path is currently hard-coded in AHK script.  So if you want to change the path you may modify the script yourself.
 
 # Usage
-1. Double click script file **AutoFish.ahk** to execute the script.
+1. Double click script file **TroveAutoFish.ahk** to execute the script.
 > A _green H_ icon will show up when the script is running.  If you can not execute the script, make sure you have AutoHotKey correctlly installed.
 
 2. Open **Trove**, find a pool, and press **F11** to start auto fishing.
@@ -61,7 +61,7 @@ This is an AutoHotKey script for auto fishing in Trove.
 
 2. 在這個頁面下載檔案
 > 在網頁右邊可以找到 **Download ZIP** 的按鈕，下載並解壓縮 .zip 檔案即可找到下列檔案。
- * **AutoFish.ahk**
+ * **TroveAutoFish.ahk**
  > 這是主要的 AHK 腳本檔案。
 
  * **boot.bmp**
@@ -71,7 +71,7 @@ This is an AutoHotKey script for auto fishing in Trove.
  > 這個路徑位置目前是寫死在腳本內的，所以如果你想把圖片放在其他路徑你可以自行修改腳本內的路徑位置。
 
 # 使用方式
-1. 點兩下 **AutoFish.ahk** 開始執行腳本
+1. 點兩下 **TroveAutoFish.ahk** 開始執行腳本
 > 當腳本執行時工具列會出現一個 _綠底的H_ 圖示。如果你點兩下無法執行腳本，請確定 AutoHotKey 是否有正確安裝。
 
 2. 開啟 **Trove** ，然後找個魚池，再按 **F11** 即可開始自動釣魚
