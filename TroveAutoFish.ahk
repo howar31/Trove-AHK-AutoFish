@@ -46,9 +46,9 @@ Loop %Lure% {
 	Sleep, 500
 
 	; Casting the line
-;	ControlSend, , {f down}, ahk_pid %pid%
+	ControlSend, , {f down}, ahk_pid %pid%
 	Sleep, 86
-;	ControlSend, , {f up}, ahk_pid %pid%
+	ControlSend, , {f up}, ahk_pid %pid%
 
 	Catch := 0	; Set "caught" singal as false
 	PoleCheck := 40	; Set pole check interval
