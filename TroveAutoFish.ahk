@@ -1,16 +1,9 @@
 ﻿#WinActivateForce
 global Version := "v20150811"	; The version number of this script
 
-; Image path for ImageSearch
-global BootImgPath := "c:\boot.bmp"	; set your Old Bood image here
-
 ; Tooltip settings
 global TooltipX := 80	; Tooltip's X position
 global TooltipY := 150	; Tooltip's Y position
-
-; Interval settings
-global Interval_AFK := 10000	; Anti-AFK trigger interval in milliseconds
-global Interval_Boot := 100		; Auto Throw Boot trigger interval in milliseconds
 
 ; Hotkeys settings, change the hotkeys here
 global HK_AutoFish := "F11"	; Hotkey for auto fishing
@@ -19,13 +12,21 @@ global HK_AntiAFK := "F9"	; Hotkey for anti-AFK
 global HK_Info := "F8"	; Hotkey for info tooltip toggle
 global HK_Exit := "F6"	; Hotkey for exit the script
 
-; Flags startup settings, do NOT change value here, might working inproperly
+; Auto Boot Throw settings
+global Interval_Boot := 100		; Auto Throw Boot trigger interval in milliseconds.  The default is 100ms
+global BootImgPath := "c:\boot.bmp"	; set your Old Bood image path here
+
+; Anti-AFK settings
+global Interval_AFK := 10000	; Anti-AFK trigger interval in milliseconds.  The default is 10 seconds (10000ms)
+global AFK_Key := "End"	; The key to send to prevent AFK by Anti-AFK.  The default is "End" key which will not effect Trove gameplay
+
+; Flags startup settings. Do NOT change value here, might working inproperly
 global Flag_ABT := false	; Auto boot throw default setting, 1 is on, 0 is off
 global Flag_AFK := false	; Anti-AFK default setting, 1 is on, 0 is off
 global Flag_Tooltip := true	; 1 for showing tooltip, 0 for hiding tooltip
 global Flag_Fishing := false	; If auto fishing started, set to 1
 
-; Fishing info settings
+; Fishing info settings. Do NOT change value here, might working inproperly
 global TimerS := 0	; Fishing timer seconds
 global TimerM := 0	; Fishing timer minutes
 global TimerH := 0	; Fishing timer hours
@@ -163,8 +164,8 @@ AutoBootThrow:
 Return
 
 AntiAFK:
-; Sending "End" key will not effect Trove gameplay
-	NatualPress("End", pid)
+; Sending key to prevent AFK
+	NatualPress(AFK_Key, pid)
 Return
 
 UpdateTimer:
