@@ -51,6 +51,7 @@ L_AutoFish:	; Auto Fishing
 		LureCount := 0
 		; Stop fishing timer
 		SetTimer, UpdateTimer, Off
+		UpdateTooltip()
 	} else {
 		Flag_Fishing := true
 		SetTimer, AutoFish, -1
