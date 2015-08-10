@@ -49,16 +49,17 @@ L_AutoFish:	; Auto Fishing
 		TimerM := 0
 		TimerH := 0
 		LureCount := 0
+		; Stop fishing timer
+		SetTimer, UpdateTimer, Off
 	} else {
 		Flag_Fishing := true
 		SetTimer, AutoFish, -1
+		; Start fishing timer
+		SetTimer, UpdateTimer, 1000
 	}
 Return
 
 AutoFish:
-	; Start fishing timer
-	SetTimer, UpdateTimer, 1000
-
 	WinGet, pidn, PID, A
 	pid := pidn
 	WinGet, hwnds, ID, A
