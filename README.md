@@ -3,6 +3,8 @@
 # Trove-AHK-AutoFish
 This is an AutoHotKey script for auto fishing in Trove.
 
+Latest update: 2015/08/10
+
 # Feature
 * Using **Memory Address** to detect biting.
 > Very solid compare to image search or audio detect method.
@@ -13,7 +15,14 @@ This is an AutoHotKey script for auto fishing in Trove.
 * Toggleable **Auto Boot Throw (ABT)** mechanism.
 > Automatically discard the _Old Boot_ from your backpack.  Convenient for long-time fishing.
 > 
-> Also, turning off the ABT mechanism to make sure AHK won't move your mouse.  Sometimes AHK ImageSearch will mis-find the image and accidentally move your mouse.  It's better to turn ABT off if you are currently working on other windows and have Trove minimized in the background.
+> Press **F9** to toggle ABT on or off. Turning off the ABT mechanism to make sure AHK won't move your mouse.  Sometimes AHK ImageSearch will mis-find the image and accidentally move your mouse.  It's better to turn ABT off if you are currently working on other windows and have Trove minimized in the background.
+>
+> ABT is always available even when you're not auto fishing.  You may press **F9** at any time to clean up your backpack.
+
+* Toggleable **Information Tooltip**
+> Hotkeys instruction and fishing info are always available in tooltop.
+>
+> Press **F8** to toggle showing or hiding the info tooltip.
 
 # Installation
 1. Download and install AutoHotKey from the [official website](http://www.autohotkey.com/).
@@ -34,16 +43,27 @@ This is an AutoHotKey script for auto fishing in Trove.
 1. Double click script file **TroveAutoFish.ahk** to execute the script.
 > A _green H_ icon will show up when the script is running.  If you can not execute the script, make sure you have AutoHotKey correctlly installed.
 
-2. Open **Trove**, find a pool, and press **F11** to start auto fishing.
+2. Open **Trove**, find a pool, press **B** to open your backpack, and press **F11** to start auto fishing.
+> Open your backpack to prevent camera rotate while moving mouse.  And also allow AHK ImageSearch to find the Old Boot in your backpack.
+
 3. The default of auto boot throw (ABT) is off at start.  Press **F9** to toggle on.
 > Note that you have to keep Trove window active for AHK ImageSearch.  And AHK will use and move your mouse to throw the boot out of your backpack once if found the match image.
+>
+> If ABT is not working correctly, you may:
+>
+> 1. Item will rotate while mouse hover on them.  Close then reopen the backpack will set the item to default position which will match the boot.bmp
+> 2. Create a new boot.bmp by yourself.  Just simply take a screenshot of the _Old Boot_.  Note that, hover will rotate the item.  You don't want a rotated image which will cause the ImageSearch fail.
 
 4. Press **F10** to stop and terminate the whole script.
+
+Hotkeys and fishing info are also displayed as tooltip.
 
 --
 
 # Trove-AHK-AutoFish
 這是 Trove 自動釣魚的 AutoHotKey 腳本。
+
+最新更新: 2015/08/10
 
 # 特色
 * 使用 **記憶體位置** 偵測是否有魚上鉤
@@ -55,7 +75,14 @@ This is an AutoHotKey script for auto fishing in Trove.
 * 可切換開關的 **自動丟鞋 (ABT)** 機制
 > 腳本可以自動的把背包內的 _鞋子 (Old Boot)_ 丟掉，有利於長時間自動釣魚。
 > 
-> 此外，將 丟鞋 (ABT) 功能關閉時，可以確保 AHK 完全不會動到你的滑鼠。有時候 AHK 的圖片搜尋功能會比對錯誤，因此讓滑鼠亂飄，如果你將 Trove 縮小到工具列背景釣魚，同時用電腦進行其他工作，建議將丟鞋功能關閉以確保滑鼠不會亂動。
+> 按 **F9** 可切換自動丟鞋功能的開關，將 自動丟鞋 (ABT) 功能關閉時，可以確保 AHK 完全不會動到你的滑鼠。有時候 AHK 的圖片搜尋功能會比對錯誤，因此讓滑鼠亂飄，如果你將 Trove 縮小到工具列背景釣魚，同時用電腦進行其他工作，建議將丟鞋功能關閉以確保滑鼠不會亂動。
+>
+> 自動丟鞋隨時可用，沒有自動釣魚的時候也可以按 **F9** 清理背包。
+
+* 可切換顯示的 **資訊浮動視窗**
+> 隨時提示按鍵功能以及釣魚相關資訊。
+>
+> 可按 **F8** 切換顯示或隱藏浮動視窗。
 
 # 安裝說明
 1. 到 AutoHotKey [官方網站](http://www.autohotkey.com/) 下載並安裝程式
@@ -76,8 +103,17 @@ This is an AutoHotKey script for auto fishing in Trove.
 1. 點兩下 **TroveAutoFish.ahk** 開始執行腳本
 > 當腳本執行時工具列會出現一個 _綠底的H_ 圖示。如果你點兩下無法執行腳本，請確定 AutoHotKey 是否有正確安裝。
 
-2. 開啟 **Trove** ，然後找個魚池，再按 **F11** 即可開始自動釣魚
+2. 開啟 **Trove** ，然後找個魚池，按 **B** 打開背包，再按 **F11** 即可開始自動釣魚
+> 打開背包是為了防止滑鼠轉動視角而無法對準魚池拋竿，並讓 AHK 的圖片比對能搜尋背包內的鞋子。
+
 3. 自動丟鞋功能 (ABT) 剛啟動時預設是關閉的，按 **F9** 可切換開啟
 > 注意，你必需要保持 Trove 視窗為啟用狀態，這樣腳本才能進行圖片比對搜尋。每當 AHK 發現符合的圖片時，會自動移動你的滑鼠把鞋子丟掉。
+>
+> 如果 ABT 無法正常運作，你可以嘗試:
+>
+> 1. 當滑鼠指在物品上的時候物品會旋轉，把背包關掉然後重新打開可以讓物品回到原始位置，也就是 boot.bmp 預設的位置。
+> 2. 自己重新建立一個新的 boot.bmp 檔案，只要將 _Old Boot_ 拍照截圖儲存即可，注意滑鼠指在物品上的時候會旋轉，旋轉過的物品截圖會造成圖片比對搜尋失敗而無法正常運作。
 
 4. 按 **F10** 停止並完全關閉整個腳本
+
+按鍵功能與相關資訊也可參考腳本的資訊浮動視窗。
