@@ -1,114 +1,185 @@
 ﻿#WinActivateForce
-global ABTflag := 0	; Auto boot throw default setting, 1 is on, 0 is off
+global Version := "v20150811"	; The version number of this script
+
+; Image path for ImageSearch
 global BootImgPath := "c:\boot.bmp"	; set your Old Bood image here
-global TooltipX := 80	; Unified the tooltip's X position
-global TooltipY := 150	; Unified the tooltip's Y position
-global Tooltipflag := 1	; 1 for showing tooltip, 0 for hiding tooltip
-global FishingStart := 0	; If auto fishing started, set to 1
+
+; Tooltip settings
+global TooltipX := 80	; Tooltip's X position
+global TooltipY := 150	; Tooltip's Y position
+
+; Interval settings
+global Interval_AFK := 10000	; Anti-AFK trigger interval in milliseconds
+global Interval_Boot := 100		; Auto Throw Boot trigger interval in milliseconds
+
+; Hotkeys settings, change the hotkeys here
+global HK_AutoFish := "F11"	; Hotkey for auto fishing
+global HK_AutoBoot := "F10"	; Hotkey for auto boot throw
+global HK_AntiAFK := "F9"	; Hotkey for anti-AFK
+global HK_Info := "F8"	; Hotkey for info tooltip toggle
+global HK_Exit := "F6"	; Hotkey for exit the script
+
+; Flags startup settings, do NOT change value here, might working inproperly
+global Flag_ABT := false	; Auto boot throw default setting, 1 is on, 0 is off
+global Flag_AFK := false	; Anti-AFK default setting, 1 is on, 0 is off
+global Flag_Tooltip := true	; 1 for showing tooltip, 0 for hiding tooltip
+global Flag_Fishing := false	; If auto fishing started, set to 1
+
+; Fishing info settings
+global TimerS := 0	; Fishing timer seconds
+global TimerM := 0	; Fishing timer minutes
+global TimerH := 0	; Fishing timer hours
 global LureCount := 0	; Used lure count
-global TimerS := 0
-global TimerM := 0
-global TimerH := 0
 
 CoordMode, ToolTip, Screen
 UpdateTooltip()
 
-SetTimer, AutoBootThrow, 1
+Hotkey, %HK_AutoFish%, L_AutoFish
+Hotkey, %HK_AutoBoot%, L_AutoBoot
+Hotkey, %HK_AntiAFK%, L_AntiAFK
+Hotkey, %HK_Info%, L_Info
+Hotkey, %HK_Exit%, L_Exit
+Return
 
-F11::	; Start the script
-FishingStart := 1
-SetTimer, UpdateTimer, 1000
+L_AutoFish:	; Auto Fishing
+	if (Flag_Fishing) {
+		Flag_Fishing := false
+		TimerS := 0
+		TimerM := 0
+		TimerH := 0
+		LureCount := 0
+	} else {
+		Flag_Fishing := true
+		SetTimer, AutoFish, -1
+	}
+Return
 
-WinGet, pidn, PID, A
-pid := pidn
-WinGet, hwnds, ID, A
-Handle := hwnds
+AutoFish:
+	; Start fishing timer
+	SetTimer, UpdateTimer, 1000
 
-Lure := 9999	; Set max lure
-Base := getProcessBaseAddress()
-WaterAddress := GetAddressWater(Base,0x00964DDC)	; Water memory address
-LavaAddress := GetAddressLava(Base,0x00964DDC)		; Lava memory address
-ChocoAddress := GetAddressChoco(Base,0x00964DDC)	; Choco memory address
+	WinGet, pidn, PID, A
+	pid := pidn
+	WinGet, hwnds, ID, A
+	Handle := hwnds
 
-Loop %Lure% {
-; If still have lure (by counting)
-	LureCount := LureCount +1
-	UpdateTooltip()
+	Lure := 9999	; Set max lure
+	Base := getProcessBaseAddress()
+	WaterAddress := GetAddressWater(Base,0x00964DDC)	; Water memory address
+	LavaAddress := GetAddressLava(Base,0x00964DDC)		; Lava memory address
+	ChocoAddress := GetAddressChoco(Base,0x00964DDC)	; Choco memory address
 
-	; Open character panel for anti-idle
-	ControlSend, , {c down}, ahk_pid %pid%
-	Sleep, 86
-	ControlSend, , {c up}, ahk_pid %pid%
-	Sleep, 86
-	ControlSend, , {c down}, ahk_pid %pid%
-	Sleep, 86
-	ControlSend, , {c up}, ahk_pid %pid%
-	Sleep, 500
-
-	; Casting the line
-	ControlSend, , {f down}, ahk_pid %pid%
-	Sleep, 86
-	ControlSend, , {f up}, ahk_pid %pid%
-
-	Catch := 0	; Set "caught" singal as false
-	PoleCheck := 40	; Set pole check interval
-
-	Loop {
-	; Line casted and pole checking loop
-		UpdateTooltip()
-		if (Catch = 1) {
-		; Already caught and need to cast again
+	Loop %Lure% {
+	; If still have lure (by counting)
+		if (!Flag_Fishing)
 			break
-		} else {
-		; Already cast and waiting for biting
-			if (PoleCheckN = PoleCheck) {
-				ControlSend, , {f down}, ahk_pid %pid%
-				Sleep, 86
-				ControlSend, , {f up}, ahk_pid %pid%
-				LureCount := 0
-			} else {
-			}
 
-			CaughtWater := ReadMemory(WaterAddress)
-			CaughtLava := ReadMemory(LavaAddress)
-			CaughtChoco := ReadMemory(ChocoAddress)
+		LureCount := LureCount +1
+		UpdateTooltip()
 
-			if (CaughtWater = 1 or CaughtLava = 1 or CaughtChoco = 1) {
-				ControlSend, , {f down}, ahk_pid %pid%
-				Sleep, 86
-				ControlSend, , {f up}, ahk_pid %pid%
-				Random, Wait, 2000, 3500
-				Sleep, %Wait%
-				Catch := 1
+		; Anti-AFK
+		Gosub, AntiAFK
+
+		NatualPress("b", pid)	; Open backpack to prevent camera rotate while moving mouse, and also for ImageSearch to find the Old Boot
+		NatualPress("f", pid)	; Casting the line
+		Sleep, 500
+
+		Flag_Catch := false	; Set "caught" singal as false
+
+		Loop {
+		; Line casted and pole checking loop, 1 second per check
+			if (!Flag_Fishing)
+				break
+
+			UpdateTooltip()
+			if (Flag_Catch) {
+			; Already caught and need to cast again, exit checking loop
+				NatualPress("b", pid)	; Close the backpack to reset the old boot rotation
+				break
 			} else {
-				PoleCheckN := PoleCheckN +1	; Pole check interval advance
-				Sleep, 1000
+			; Already cast and checking for biting
+				CaughtWater := ReadMemory(WaterAddress)
+				CaughtLava := ReadMemory(LavaAddress)
+				CaughtChoco := ReadMemory(ChocoAddress)
+
+				if (CaughtWater || CaughtLava || CaughtChoco) {
+				; Fish caught, reel in
+					NatualPress("f", pid)
+					Random, Wait, 2000, 3500
+					Sleep, %Wait%
+					Flag_Catch := true
+				} else {
+				; caught nothing, wait 1 second and continue checking
+					Sleep, 1000
+				}
 			}
 		}
 	}
-}
-ExitApp
-
-F10::	; Stop the script
-ExitApp
-
-F9::	; Toggle auto boot throw
-if (ABTflag = 1) {
-	ABTflag := 0
-} else {
-	ABTflag := 1
-}
-UpdateTooltip()
 Return
 
-F8::	; Toggle tooltip
-if (Tooltipflag = 0) {
-	Tooltipflag := 1
+L_AutoBoot:	; Toggle auto boot throw
+	if (Flag_ABT) {
+		SetTimer, AutoBootThrow, Off
+		Flag_ABT := false
+	} else {
+		SetTimer, AutoBootThrow, %Interval_Boot%
+		Flag_ABT := true
+	}
 	UpdateTooltip()
-} else {
-	Tooltipflag := 0
-	ToolTip
-}
+Return
+
+L_AntiAFK:	; Anti-AFK
+	if (Flag_AFK) {
+		SetTimer, AntiAFK, Off
+		Flag_AFK := false
+	} else {
+		WinGet, pidn, PID, A
+		pid := pidn
+
+		SetTimer, AntiAFK, %Interval_AFK%
+		Flag_AFK := true
+	}
+	UpdateTooltip()
+Return
+
+L_Info:	; Toggle tooltip
+	if (Flag_Tooltip) {
+		Flag_Tooltip := false
+		ToolTip
+	} else {
+		Flag_Tooltip := true
+		UpdateTooltip()
+	}
+Return
+
+L_Exit:	; Stop the script
+ExitApp
+
+AutoBootThrow:
+	Imagesearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *70 %BootImgPath%
+	if (errorlevel = 0) {
+		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY%
+	}
+Return
+
+AntiAFK:
+; Sending "End" key will not effect Trove gameplay
+	NatualPress("End", pid)
+Return
+
+UpdateTimer:
+	if (TimerS = 59) { 
+		TimerS = 0 
+		TimerM += 1
+	}
+	if (TimerM = 60) { 
+		TimerM = 0 
+		TimerH += 1 
+		UpdateTooltip()
+		Return
+	}
+	TimerS += 1
+	UpdateTooltip()
 Return
 
 GetAddressWater(Base, Address) {
@@ -136,7 +207,7 @@ GetAddressChoco(Base, Address) {
 }
 
 getProcessBaseAddress() {
-	Global Handle
+	global Handle
 	return DllCall( A_PtrSize = 4
 		? "GetWindowLong"
 		: "GetWindowLongPtr"
@@ -147,7 +218,7 @@ getProcessBaseAddress() {
 } 
 
 ReadMemory(MADDRESS) {
-	Global pid
+	global pid
 	VarSetCapacity(MVALUE,4,0)
 	ProcessHandle := DllCall("OpenProcess", "Int", 24, "Char", 0, "UInt", pid, "UInt")
 	;DllCall("ReadProcessMemory", "UInt", ProcessHandle, "UInt", MADDRESS, "Str", MVALUE, "UInt", 4, "UInt *", 0)
@@ -157,55 +228,54 @@ ReadMemory(MADDRESS) {
 	return, result
 }
 
+NatualSleep() {
+	Random, SleepTime, 66, 122
+	Sleep, %SleepTime%
+}
+
+NatualPress(npbtn, nppid) {
+	ControlSend, , {%npbtn% down}, ahk_pid %nppid%
+	NatualSleep()
+	ControlSend, , {%npbtn% up}, ahk_pid %nppid%
+}
+
 UpdateTooltip() {
-	F8info := "`n[F8] Toggle this info."
-	F10info := "`n[F10] Exit script."
-	F11info := "`n[F11] Start auto fishing."
-	if (ABTflag = 0) {
-		F9info := "`n[F9] Auto Boot Throw is OFF."
-	} else if (ABTflag = 1) {
-		F9info := "`n[F9] Auto Boot Throw is ON."
+	Info_Tips := "`n[" . HK_Info . "] Toggle this info."
+	Info_Exit := "`n[" . HK_Exit . "] Exit script."
+	Info_Lure := "`nLure used - " . (LureCount - 1)
+
+	if (!Flag_Fishing) {
+		Info_Fish := "`n[" . HK_AutoFish . "] Auto Fishing is OFF."
+	} else if (Flag_Fishing) {
+		Info_Fish := "`n[" . HK_AutoFish . "] Auto Fishing is ON."
 	}
-	Lureinfo := "`nLure used - " . (LureCount - 1)
+	if (!Flag_ABT) {
+		Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is OFF."
+	} else if (Flag_ABT) {
+		Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is ON."
+	}
+	if (!Flag_AFK) {
+		Info_AFK := "`n[" . HK_AntiAFK . "] Anti-AFK is OFF."
+	} else if (Flag_AFK) {
+		Info_AFK := "`n[" . HK_AntiAFK . "] Anti-AFK is ON."
+	}
+
 	TimerS := SubStr("0" . TimerS, -1)
 	TimerM := SubStr("0" . TimerM, -1)
 	Timerinfo := "`nFishing Time - " . TimerH . ":" . TimerM . ":" . TimerS
 
-	StatusTip := "`n---" . Lureinfo . Timerinfo
-	FooterTip := "`n---" . F8info . F10info
+	HeaderTip := "<AutoFish>`n--- " . Version . "  by Howar31"
+	FuncTip := Info_Fish . Info_Boot . Info_AFK
+	StatusTip := "`n---" . Info_Lure . Timerinfo
+	FooterTip := "`n---" . Info_Tips . Info_Exit
 
-	if (Tooltipflag = 1) {
-		if (FishingStart = 0) {
-			ToolTip, =AutoFish= %F11info%%F9info%%FooterTip%, TooltipX, TooltipY
-		} else if (FishingStart = 1) {
-			ToolTip, =AutoFish= Now Fishing... %F9info%%StatusTip%%FooterTip%, TooltipX, TooltipY
+	if (Flag_Tooltip) {
+		if (!Flag_Fishing) {
+			ToolTip, %HeaderTip%%FuncTip%%FooterTip%, TooltipX, TooltipY
+		} else if (Flag_Fishing) {
+			ToolTip, %HeaderTip%%FuncTip%%StatusTip%%FooterTip%, TooltipX, TooltipY
 		}
 	} else {
 		ToolTip
 	}
 }
-
-AutoBootThrow:
-	if (ABTflag = 1) {
-	; If ABTflag is set to true(1) then execute AutoBootThrow script
-		Imagesearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *70 %BootImgPath%
-		if (errorlevel = 0) {
-			MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY%
-		}
-	}
-Return
-
-UpdateTimer:
-	if (TimerS = 59) { 
-		TimerS = 0 
-		TimerM += 1
-	}
-	if (TimerM = 60) { 
-		TimerM = 0 
-		TimerH += 1 
-		UpdateTooltip()
-		RETURN 
-	}
-	TimerS += 1
-	UpdateTooltip()
-Return
