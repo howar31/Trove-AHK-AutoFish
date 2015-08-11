@@ -33,6 +33,8 @@ This is an AutoHotKey script for auto fishing in Trove.
 > This is an independent Anti-AFK mechanism from Auto Fish.  You do not need to enable Auto Fish to use this feature (and vise versa).
 >
 > The default setting is to send "END" to Trove every 10 seconds to prevent AFK, and also not interrupt Trove gameplay.  That is, you may play Trove with this feature enable and normal gameplay will not be affected.
+>
+> Note that, you have to press **F9** while Trove window is active for AHK to capture the process ID and send the key correct to Trove.
 
 * Toggleable **Information Tooltip**
 > Press **F8** to toggle showing or hiding the info tooltip.
@@ -131,6 +133,8 @@ All hotkeys info are also displayed in tooltip.
 > 這個防斷線機制與自動釣魚完全無關，兩者互不影響也不依賴，你不需要啟用自動釣魚就可以使用這個功能 (反之亦然) 。
 >
 > 這功能預設是每10秒送一個「END」按鍵給 Trove 以防止閒置斷線，而同時也不會影響正常的 Trove 遊戲，也就是說你可以把這功能打開，然後正常的玩 Trove 也不會有任何干擾。
+>
+> 注意，務必要在 Trove 的視窗內按 **F9** ，好讓 AHK 可以抓到正確的 process ID ，才能把按鍵正確傳送給 Trove 。
 
 * 可切換顯示的 **資訊浮動視窗**
 > 可按 **F8** 切換顯示或隱藏浮動視窗。
