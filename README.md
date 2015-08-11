@@ -3,7 +3,7 @@
 # Trove-AHK-AutoFish
 This is an AutoHotKey script for auto fishing in Trove.
 
-![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.jpg "Trove-AHK-AutoFish Preview Screenshot")
+![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
 
 ## Feature
 * Using **Memory Address** to detect biting.
@@ -103,7 +103,7 @@ All hotkeys info are also displayed in tooltip.
 # Trove-AHK-AutoFish
 這是 Trove 自動釣魚的 AutoHotKey 腳本。
 
-![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.jpg "Trove-AHK-AutoFish Preview Screenshot")
+![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
 
 ## 特色
 * 使用 **記憶體位置** 偵測是否有魚上鉤
