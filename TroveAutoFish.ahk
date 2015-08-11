@@ -242,6 +242,7 @@ NatualPress(npbtn, nppid) {
 	ControlSend, , {%npbtn% down}, ahk_pid %nppid%
 	NatualSleep()
 	ControlSend, , {%npbtn% up}, ahk_pid %nppid%
+	NatualSleep()
 }
 
 UpdateTooltip() {
