@@ -1,5 +1,7 @@
 ﻿#WinActivateForce
-global Version := "v20150811"	; The version number of this script
+; Script config. Do NOT change value here, might working inproperly!
+global Version := "v20150812"	; The version number of this script
+global FishAddress := "0x0096550C"	; The memory address for fishing
 
 ; Tooltip settings
 global TooltipX := 80	; Tooltip's X position
@@ -20,13 +22,13 @@ global BootImgPath := "c:\boot.bmp"	; set your Old Bood image path here
 global Interval_AFK := 10000	; Anti-AFK trigger interval in milliseconds.  The default is 10 seconds (10000ms)
 global AFK_Key := "End"	; The key to send to prevent AFK by Anti-AFK.  The default is "End" key which will not effect Trove gameplay
 
-; Flags startup settings. Do NOT change value here, might working inproperly
+; Flags startup settings. Do NOT change value here, might working inproperly!
 global Flag_ABT := false	; Auto boot throw default setting, 1 is on, 0 is off
 global Flag_AFK := false	; Anti-AFK default setting, 1 is on, 0 is off
 global Flag_Tooltip := true	; 1 for showing tooltip, 0 for hiding tooltip
 global Flag_Fishing := false	; If auto fishing started, set to 1
 
-; Fishing info settings. Do NOT change value here, might working inproperly
+; Fishing info settings. Do NOT change value here, might working inproperly!
 global TimerS := 0	; Fishing timer seconds
 global TimerM := 0	; Fishing timer minutes
 global TimerH := 0	; Fishing timer hours
@@ -68,9 +70,9 @@ AutoFish:
 
 	Lure := 9999	; Set max lure
 	Base := getProcessBaseAddress()
-	WaterAddress := GetAddressWater(Base,0x00964DDC)	; Water memory address
-	LavaAddress := GetAddressLava(Base,0x00964DDC)		; Lava memory address
-	ChocoAddress := GetAddressChoco(Base,0x00964DDC)	; Choco memory address
+	WaterAddress := GetAddressWater(Base,FishAddress)	; Water memory address
+	LavaAddress := GetAddressLava(Base,FishAddress)		; Lava memory address
+	ChocoAddress := GetAddressChoco(Base,FishAddress)	; Choco memory address
 
 	Loop %Lure% {
 	; If still have lure (by counting)
@@ -267,7 +269,7 @@ UpdateTooltip() {
 	TimerM := SubStr("0" . TimerM, -1)
 	Timerinfo := "`nFishing Time - " . TimerH . ":" . TimerM . ":" . TimerS
 
-	HeaderTip := "<AutoFish>`n--- " . Version . "  by Howar31"
+	HeaderTip := "<AutoFish>`n---  " . Version . "  by Howar31"
 	FuncTip := Info_Fish . Info_Boot . Info_AFK
 	StatusTip := "`n---" . Info_Lure . Timerinfo
 	FooterTip := "`n---" . Info_Tips . Info_Exit
