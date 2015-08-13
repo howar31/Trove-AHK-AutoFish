@@ -75,14 +75,24 @@ This is an AutoHotKey script for auto fishing in Trove.
 > Auto Fish will close and reopen your backpack to reset the item rotation for porper Imagesearch.
 
 3. The default of auto boot throw (ABT) is off at start.  Press **F10** to toggle on.
-> Note that you have to keep Trove window active for AHK ImageSearch.  And AHK will use and move your mouse to throw the boot out of your backpack once if found the match image.
->
-> If ABT is not working correctly, you may:
->
-> 1. Item will rotate while mouse hover on them.  Close then reopen the backpack will set the item to default position which will match the boot.bmp
-> 2. Create a new boot.bmp by yourself.  Just simply take a screenshot of the _Old Boot_.  Note that, hover will rotate the item.  You don't want a rotated image which will cause the ImageSearch fail.
+> Note that you have to keep Trove window active for AHK ImageSearch.  And AHK will use and move your mouse to throw the boot out of your backpack once if found the match image.s
 
 4. Press **F6** to stop and terminate the whole script.
+
+## Troubleshooting
+
+If Auto Boot Throw (ABT) is not working correctly, it should be the ImageSearch problem.  The reasons and solutions:
+
+1. Item rotated
+> Item will rotate while mouse hover on them.  You may close and reopen the backpack to reset the item rotation to default.
+
+2. Window resolution and ratio
+> Everyone has different graphic setting.  Sometimes the small resolution and ratio will cause the item image deformation.  You may create a new boot.bmp by yourself.  Just simply take a screenshot of the _Old Boot_.  Note that, hover will rotate the item.  You don't want a rotated image which will cause the ImageSearch fail.
+
+3. Ambient lighting
+> The items in backpack will be affected by enviornment lighting in Trove.  Different lighting might cause the item images change color.  You may simple move around to change the fishing position to solve this problem.
+
+Basically re-capture the screenshot of Old Boot on your computer will solve most of the ABT problem.s
 
 ## Hotkeys 
 
@@ -175,13 +185,23 @@ All hotkeys info are also displayed in tooltip.
 
 3. 自動丟鞋功能 (ABT) 剛啟動時預設是關閉的，按 **F10** 可切換開啟
 > 注意，你必需要保持 Trove 視窗為啟用狀態，這樣腳本才能進行圖片比對搜尋。每當 AHK 發現符合的圖片時，會自動移動你的滑鼠把鞋子丟掉。
->
-> 如果 ABT 無法正常運作，你可以嘗試:
->
-> 1. 當滑鼠指在物品上的時候物品會旋轉，把背包關掉然後重新打開可以讓物品回到原始位置，也就是 boot.bmp 預設的位置。
-> 2. 自己重新建立一個新的 boot.bmp 檔案，只要將 _Old Boot_ 拍照截圖儲存即可，注意滑鼠指在物品上的時候會旋轉，旋轉過的物品截圖會造成圖片比對搜尋失敗而無法正常運作。
 
 4. 按 **F6** 停止並完全關閉整個腳本
+
+## 問題排解
+
+如果 自動丟鞋 (ABT) 無法正常運作，基本上都是圖片比對的問題，主要原因和解決方法:
+
+1. 物品被旋轉
+> 當滑鼠指在物品上的時候物品會旋轉，可以把背包關掉然後重新打開，物品就會回到原始位置。
+
+2. 視窗解析度和比例不同
+> 每個人遊戲視窗大小比例不一定一樣，有些解析度或比例太小會造成物品圖片被擠壓，這種情況可以自己重新建立一個新的 boot.bmp 檔案，只要將 _Old Boot_ 拍照截圖儲存即可，注意滑鼠不要指到物品上，會造成旋轉，旋轉過的物品截圖也無法正常運作。
+
+3. 物品欄光源打光
+> Trove 的背包物品欄會因為周圍環境光源不同，內部物品也會跟著打光，因此造成物品的顏色變色，碰到這種問題可以換一個角度或位置釣魚，讓背包不要被其他顏色光源照射即可。
+
+基本上只要在你自己的電腦上重新截取鞋子的圖片就可以解決大部分的自動丟鞋問題。
 
 ## 快捷鍵 
 
