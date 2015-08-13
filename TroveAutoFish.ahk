@@ -1,6 +1,6 @@
 ﻿#WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
-global Version := "v20150812"	; The version number of this script
+global Version := "v20150814"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
 
 ; Tooltip settings
