@@ -1,6 +1,6 @@
 ﻿#WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
-global Version := "v20150814"	; The version number of this script
+global Version := "v20150815"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
 
 ; Tooltip settings
@@ -246,6 +246,10 @@ NatualPress(npbtn, nppid) {
 }
 
 UpdateTooltip() {
+	if (!Flag_Tooltip) {
+		return
+	}
+
 	Info_Tips := "`n[" . HK_Info . "] Toggle this info."
 	Info_Exit := "`n[" . HK_Exit . "] Exit script."
 	Info_Lure := "`nLure used - " . (LureCount - 1)
@@ -275,13 +279,9 @@ UpdateTooltip() {
 	StatusTip := "`n---" . Info_Lure . Timerinfo
 	FooterTip := "`n---" . Info_Tips . Info_Exit
 
-	if (Flag_Tooltip) {
-		if (!Flag_Fishing) {
-			ToolTip, %HeaderTip%%FuncTip%%FooterTip%, TooltipX, TooltipY
-		} else if (Flag_Fishing) {
-			ToolTip, %HeaderTip%%FuncTip%%StatusTip%%FooterTip%, TooltipX, TooltipY
-		}
-	} else {
-		ToolTip
+	if (!Flag_Fishing) {
+		ToolTip, %HeaderTip%%FuncTip%%FooterTip%, TooltipX, TooltipY
+	} else if (Flag_Fishing) {
+		ToolTip, %HeaderTip%%FuncTip%%StatusTip%%FooterTip%, TooltipX, TooltipY
 	}
 }
