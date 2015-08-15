@@ -1,4 +1,4 @@
-﻿#WinActivateForce
+#WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
 global Version := "v20150815"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
@@ -87,37 +87,35 @@ AutoFish:
 
 		NatualPress("b", pid)	; Open backpack to prevent camera rotate while moving mouse, and also for ImageSearch to find the Old Boot
 		NatualPress("f", pid)	; Casting the line
-		Sleep, 500
-
-		Flag_Catch := false	; Set "caught" singal as false
-
+		Sleep, 15000	;Players must wait for 20-30 seconds for the lure to start splashing in order to reel in a fish. Reduce the pole checking loop.
+		FishingTimeCount := 0
+		
 		Loop {
 		; Line casted and pole checking loop, 1 second per check
 			if (!Flag_Fishing)
 				break
 
 			UpdateTooltip()
-			if (Flag_Catch) {
-			; Already caught and need to cast again, exit checking loop
-				NatualPress("b", pid)	; Close the backpack to reset the old boot rotation
-				break
-			} else {
+			
 			; Already cast and checking for biting
-				CaughtWater := ReadMemory(WaterAddress)
-				CaughtLava := ReadMemory(LavaAddress)
-				CaughtChoco := ReadMemory(ChocoAddress)
+			CaughtWater := ReadMemory(WaterAddress)
+			CaughtLava := ReadMemory(LavaAddress)
+			CaughtChoco := ReadMemory(ChocoAddress)
 
-				if (CaughtWater || CaughtLava || CaughtChoco) {
-				; Fish caught, reel in
-					NatualPress("f", pid)
-					Random, Wait, 2000, 3500
-					Sleep, %Wait%
-					Flag_Catch := true
-				} else {
-				; caught nothing, wait 1 second and continue checking
-					Sleep, 1000
-				}
+			if (CaughtWater || CaughtLava || CaughtChoco) {
+			; Fish caught, reel in
+				NatualPress("f", pid)
+				NatualPress("b", pid)
+				NatualSleep(2000, 3500) ; Wait a few seconds
+				break
 			}
+			
+			; caught nothing, wait 1 second and continue checking
+			Sleep, 1000
+			
+			if (FishingTimeCount++ > 20)	; Over 35 seconds. Missing a fish or someting wrong
+				break
+				
 		}
 	}
 Return
@@ -163,7 +161,8 @@ ExitApp
 AutoBootThrow:
 	Imagesearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *70 %BootImgPath%
 	if (errorlevel = 0) {
-		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY%
+		Random, DragSpeed, 5, 15	; Throw naturally
+		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY%, %DragSpeed%
 	}
 Return
 
@@ -233,8 +232,8 @@ ReadMemory(MADDRESS) {
 	return, result
 }
 
-NatualSleep() {
-	Random, SleepTime, 66, 122
+NatualSleep(nsA:=66, nsB:=122) {
+	Random, SleepTime, %nsA%, %nsB%
 	Sleep, %SleepTime%
 }
 
