@@ -1,6 +1,6 @@
 #WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
-global Version := "v20150815"	; The version number of this script
+global Version := "v20150816"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
 
 ; Tooltip settings
@@ -15,7 +15,7 @@ global HK_Info := "F8"	; Hotkey for info tooltip toggle
 global HK_Exit := "F6"	; Hotkey for exit the script
 
 ; Auto Boot Throw settings
-global Interval_Boot := 100		; Auto Throw Boot trigger interval in milliseconds.  The default is 100ms
+global Interval_Boot := 100		; Auto Throw Boot trigger interval in milliseconds.  The default is 100ms.  Set longer interval to save CPU usage.  Set shorter interval to throw boot faster.
 global BootImgPath := "c:\boot.bmp"	; set your Old Bood image path here
 
 ; Anti-AFK settings
