@@ -105,8 +105,9 @@ AutoFish:
 			if (CaughtWater || CaughtLava || CaughtChoco) {
 			; Fish caught, reel in
 				NatualPress("f", pid)
+				Random, Wait, 2000, 3500 ; Wait a few seconds
+				Sleep, %Wait%
 				NatualPress("b", pid)
-				NatualSleep(2000, 3500) ; Wait a few seconds
 				break
 			}
 			
@@ -232,8 +233,8 @@ ReadMemory(MADDRESS) {
 	return, result
 }
 
-NatualSleep(nsA:=66, nsB:=122) {
-	Random, SleepTime, %nsA%, %nsB%
+NatualSleep() {
+	Random, SleepTime, 66, 122
 	Sleep, %SleepTime%
 }
 
