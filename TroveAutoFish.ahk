@@ -1,6 +1,6 @@
 #WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
-global Version := "v20150816"	; The version number of this script
+global Version := "v20150817"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
 
 ; Tooltip settings
@@ -15,7 +15,7 @@ global HK_Info := "F8"	; Hotkey for info tooltip toggle
 global HK_Exit := "F6"	; Hotkey for exit the script
 
 ; Auto Boot Throw settings
-global Interval_Boot := 100		; Auto Throw Boot trigger interval in milliseconds.  The default is 100ms.  Set longer interval to save CPU usage.  Set shorter interval to throw boot faster.
+global Interval_Boot := 2000	; Auto Throw Boot trigger interval in milliseconds.  The default is 2000ms.  Set longer interval to save CPU usage.  Set shorter interval to throw boot faster.
 global BootImgPath := "c:\boot.bmp"	; set your Old Bood image path here
 
 ; Anti-AFK settings
@@ -79,15 +79,16 @@ AutoFish:
 		if (!Flag_Fishing)
 			break
 
+		NatualPress("b", pid)	; Open backpack to prevent camera rotate while moving mouse, and also for ImageSearch to find the Old Boot
+
 		LureCount := LureCount +1
 		UpdateTooltip()
 
 		; Anti-AFK
 		Gosub, AntiAFK
 
-		NatualPress("b", pid)	; Open backpack to prevent camera rotate while moving mouse, and also for ImageSearch to find the Old Boot
 		NatualPress("f", pid)	; Casting the line
-		Sleep, 15000	;Players must wait for 20-30 seconds for the lure to start splashing in order to reel in a fish. Reduce the pole checking loop.
+		Sleep, 15000	; Check for bite after 15 seconds.  Players must wait for 20-30 seconds for the lure to start splashing in order to reel in a fish. Reduce the pole checking loop.
 		FishingTimeCount := 0
 		
 		Loop {
@@ -114,7 +115,7 @@ AutoFish:
 			; caught nothing, wait 1 second and continue checking
 			Sleep, 1000
 			
-			if (FishingTimeCount++ > 20)	; Over 35 seconds. Missing a fish or someting wrong
+			if (FishingTimeCount++ > 20)	; If waiting time is over 35 seconds, it must be a miss or someting wrong.  Re-cast.
 				break
 				
 		}
@@ -162,7 +163,7 @@ ExitApp
 AutoBootThrow:
 	Imagesearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *70 %BootImgPath%
 	if (errorlevel = 0) {
-		Random, DragSpeed, 5, 15	; Throw naturally
+		Random, DragSpeed, 2, 9	; Throw naturally
 		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY%, %DragSpeed%
 	}
 Return

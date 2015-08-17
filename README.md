@@ -26,15 +26,19 @@ This is an AutoHotKey script for auto fishing in Trove.
 > Turning off the ABT mechanism to make sure AHK won't move your mouse.  Sometimes AHK ImageSearch will mis-find the image and accidentally move your mouse.  It's better to turn ABT off if you are currently working on other windows and have Trove minimized in the background.
 >
 > ABT is always available even when you're not auto fishing.  You may press **F10** at any time to clean up your backpack.
+>
+> The ImageSearch interval is set to 2 seconds by default.  You may follow the comments to change this value in script.  Set longer interval to save CPU usage, while set shorter interval to throw boot faster.
 
 * Toggleable **Anti-AFK**
 > Press **F9** to toggle Anti-AFK on or off.
 >
 > This is an independent Anti-AFK mechanism from Auto Fish.  You do not need to enable Auto Fish to use this feature (and vise versa).
 >
-> The default setting is to send "END" to Trove every 10 seconds to prevent AFK, and also not interrupt Trove gameplay.  That is, you may play Trove with this feature enable and normal gameplay will not be affected.  And also you may minimize Trove to taskbar, the Anti-AFK will still work in the background.
+> While enable, Anti-AFK will send "END" key to Trove periodically to prevent AFK, and this key will not interrupt Trove gameplay.  That is, you may play Trove with this feature enable and normal gameplay will not be affected.  And also you may minimize Trove to taskbar, the Anti-AFK will still work in the background.
 >
 > Note that, you have to press **F9** while Trove window is active for AHK to capture the process ID and send the key correct to Trove.
+>
+> The key send interval is set to 10 seconds by default.  You may follow the comments to change this value in script.
 
 * Toggleable **Information Tooltip**
 > Press **F8** to toggle showing or hiding the info tooltip.
@@ -42,12 +46,14 @@ This is an AutoHotKey script for auto fishing in Trove.
 > This is a always-on-top tooltip which show the script current status and related information.  So you may see the info on desktop even when Trove minimized.
 >
 > Hotkeys instruction and fishing info are always available in tooltop.
+>
+> The Tooltip position is set to 80 X-pixel 150 Y-pixel from top left by default.  You may follow the comments to change this value in script.
 
 * Simulated **Natual Action**
 > The script will simulate human keypress and pause to present natual action.
 
 * Configurable **Hotkeys**
-> All hotkeys are configurable in the script file.  You may follow the comments in script files to edit the hotkeys.
+> All hotkeys are configurable in the script file.  You may follow the comments to edit the hotkeys in script.
 
 
 ## Installation
@@ -136,15 +142,19 @@ All hotkeys info are also displayed in tooltip.
 > 將 自動丟鞋 (ABT) 功能關閉時，可以確保 AHK 完全不會動到你的滑鼠。有時候 AHK 的圖片搜尋功能會比對錯誤，因此讓滑鼠亂飄，如果你將 Trove 縮小到工具列背景釣魚，同時用電腦進行其他工作，建議將丟鞋功能關閉以確保滑鼠不會亂動。
 >
 > 自動丟鞋隨時可用，沒有自動釣魚的時候也可以按 **F10** 清理背包。
+>
+> 圖片比對迴圈間隔預設為2秒比對一次，你可以參考腳本內的註解資訊自行修改這個數值。設定較長的間隔以降低 CPU 使用率，或設定較短的間隔加快丟鞋速度。
 
 * 可切換開關的 **防斷線** 機制
 > 按 **F9** 可切換防斷線機制的開關。
 >
 > 這個防斷線機制與自動釣魚完全無關，兩者互不影響也不依賴，你不需要啟用自動釣魚就可以使用這個功能 (反之亦然) 。
 >
-> 這功能預設是每10秒送一個「END」按鍵給 Trove 以防止閒置斷線，而同時也不會影響正常的 Trove 遊戲，也就是說你可以把這功能打開，然後正常的玩 Trove 也不會有任何干擾。同時你也可以將 Trove 縮小到工具列，防斷線功能依然可以在背景正常運作。
+> 防斷線機制每隔一段時間會送一個「END」按鍵給 Trove 以防止閒置斷線，而同時這個按鍵也不會影響正常的 Trove 遊戲，也就是說你可以把這功能打開，然後正常的玩 Trove 也不會有任何干擾。同時你也可以將 Trove 縮小到工具列，防斷線功能依然可以在背景正常運作。
 >
 > 注意，務必要在 Trove 的視窗內按 **F9** ，好讓 AHK 可以抓到正確的 process ID ，才能把按鍵正確傳送給 Trove 。
+>
+> 按鍵送出間隔預設為10秒，你可以參考腳本內的註解資訊自行修改這個數值。
 
 * 可切換顯示的 **資訊浮動視窗**
 > 可按 **F8** 切換顯示或隱藏浮動視窗。
@@ -152,6 +162,8 @@ All hotkeys info are also displayed in tooltip.
 > 這是一個置頂的浮動視窗，顯示腳本目前的狀況以及相關資訊，所以就算 Trove 縮到最小，你仍然可以在桌面上察看相關的資訊。
 >
 > 按鍵功能以及釣魚相關資訊都會顯示在這裡。
+>
+> 浮動視窗的位置預設是以左上角為準 X軸 80px 、 Y軸 150px ，你可以參考腳本內的註解資訊自行修改這個數值。
 
 * 模擬 **自然操作**
 > 腳本會模擬人類按鍵盤的方式與停頓時間，達到更自然的操作效果。
