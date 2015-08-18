@@ -1,6 +1,6 @@
 ﻿#WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
-global Version := "v20150817"	; The version number of this script
+global Version := "v20150818"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
 
 ; Tooltip settings
@@ -17,6 +17,7 @@ global HK_Exit := "F6"	; Hotkey for exit the script
 ; Auto Boot Throw settings
 global Interval_Boot := 2000	; Auto Throw Boot trigger interval in milliseconds.  The default is 2000ms.  Set longer interval to save CPU usage.  Set shorter interval to throw boot faster.
 global BootImgPath := "c:\boot.bmp"	; set your Old Bood image path here
+global FastABTDelay := 0.5	; Long press delay before triggering Fast ABT.  The default is 0.5 seconds
 
 ; Anti-AFK settings
 global Interval_AFK := 10000	; Anti-AFK trigger interval in milliseconds.  The default is 10 seconds (10000ms)
@@ -123,10 +124,11 @@ AutoFish:
 Return
 
 L_AutoBoot:	; Toggle auto boot throw
-	KeyWait, %HK_AutoBoot%, T0.5    ;Detect how long HK_AutoBoot has been pressed. Set 0.5 second
+	KeyWait, %HK_AutoBoot%, T%FastABTDelay%    ;Detect how long HK_AutoBoot has been pressed. Set 0.5 second
 	if (errorlevel) {
-		loop{
-			if(!GetKeyState(HK_AutoBoot, "P"))
+		loop {
+			UpdateTooltip()
+			if (!GetKeyState(HK_AutoBoot, "P"))
 				Break
 			Gosub, AutoBootThrow
 			Random, Wait, 10, 50 ; Wait a few milliseconds
@@ -134,11 +136,12 @@ L_AutoBoot:	; Toggle auto boot throw
 		}
 	} else {
 		if (Flag_ABT) {
-			SetTimer, AutoBootThrow, Off
 			Flag_ABT := false
+			SetTimer, AutoBootThrow, Off
 		} else {
-			SetTimer, AutoBootThrow, %Interval_Boot%
 			Flag_ABT := true
+			Gosub, AutoBootThrow
+			SetTimer, AutoBootThrow, %Interval_Boot%
 		}
 	}
 	UpdateTooltip()
@@ -174,10 +177,10 @@ ExitApp
 AutoBootThrow:
 	Imagesearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *70 %BootImgPath%
 	if (errorlevel = 0) {
-		if(GetKeyState(HK_AutoBoot, "P")){
-			DragSpeed = 2
+		if (GetKeyState(HK_AutoBoot, "P")) {
+			DragSpeed = 2	; Fast ABT
 		} else {
-			Random, DragSpeed, 2, 9	; Throw naturally
+			Random, DragSpeed, 4, 10	; Throw naturally
 		}
 		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY% ,%DragSpeed%
 	}
@@ -276,7 +279,11 @@ UpdateTooltip() {
 		Info_Fish := "`n[" . HK_AutoFish . "] Auto Fishing is ON."
 	}
 	if (!Flag_ABT) {
-		Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is OFF."
+		if (GetKeyState(HK_AutoBoot, "P")) {
+			Info_Boot := "`n[FAST] Auto Boot Throw is ON."
+		} else {
+			Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is OFF."
+		}
 	} else if (Flag_ABT) {
 		Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is ON."
 	}
