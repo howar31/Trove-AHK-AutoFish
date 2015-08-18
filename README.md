@@ -10,7 +10,7 @@ You may check the [commit history](https://github.com/howar31/Trove-AHK-AutoFish
 
 Here are the tags used below:
 * **[New]** The new feature added in the version.
-* **[Update]** Script optimization or minor change 感謝 ve the script but not changing the main function.
+* **[Update]** Script optimization or minor change to improve the script but not changing the main function.
 * **[Fix]** Important fix for bugs that affect main function.  Highly recommand update to this version.
 
 ### Latest Change
