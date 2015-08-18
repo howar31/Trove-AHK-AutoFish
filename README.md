@@ -16,7 +16,7 @@ Here are the tags used below:
 ### Latest Change
 **v20150818**
 * [New] Long press F10 for FastABT Mode.  _(Thanks to [KylinWu](https://github.com/KylinWu))_
-* [New] Configurable settings for FastABT long press delay (The default is to press 0.5s to active FastABT).  (FastABTDelay)
+* [New] Configurable settings for FastABT long press delay (The default is to press 0.5s to activate FastABT).  (FastABTDelay)
 * [New] Update Info Tooltip for FastABT Mode.
 
 ### Recent Change
@@ -54,6 +54,8 @@ Older changelog please visit [commit history](https://github.com/howar31/Trove-A
 > ABT is always available even when you're not auto fishing.  You may press **F10** at any time to clean up your backpack.
 >
 > The ImageSearch interval is set to 2 seconds by default.  You may follow the comments to change this value in script.  Set longer interval to save CPU usage, while set shorter interval to throw boot faster.
+>
+> Long press **F10** to temporarily activate FastABT Mode.  In this mode the script will throw boots in high speed, instead of the originally 2 seconds per boot.  Useful while cleaning backpack manually.
 
 * Toggleable **Anti-AFK**
 > Press **F9** to toggle Anti-AFK on or off.
@@ -197,6 +199,8 @@ All hotkeys info are also displayed in tooltip.
 > 自動丟鞋隨時可用，沒有自動釣魚的時候也可以按 **F10** 清理背包。
 >
 > 圖片比對迴圈間隔預設為2秒比對一次，你可以參考腳本內的註解資訊自行修改這個數值。設定較長的間隔以降低 CPU 使用率，或設定較短的間隔加快丟鞋速度。
+>
+> 長按 **F10** 可以啟動臨時高速丟鞋模式，腳本會以最高速度快速丟鞋而不是2秒才丟一次，在手動清理包包的時候很方便。 
 
 * 可切換開關的 **防斷線** 機制
 > 按 **F9** 可切換防斷線機制的開關。
