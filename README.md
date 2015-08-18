@@ -1,9 +1,35 @@
-> _[中文說明在文章後面](https://github.com/howar31/Trove-AHK-AutoFish#trove-ahk-autofish-1)_
+> **[中文說明請見後半段](https://github.com/howar31/Trove-AHK-AutoFish#trove-ahk-autofish-1)**
 
 # Trove-AHK-AutoFish
 This is an AutoHotKey script for auto fishing in Trove.
 
 ![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
+
+## Changelog
+You may check the [commit history](https://github.com/howar31/Trove-AHK-AutoFish/commits/master) for full changelog on this GitHub repo.
+
+Here are the tags used below:
+* **[New]** The new feature added in the version.
+* **[Update]** Script optimization or minor change 感謝 ve the script but not changing the main function.
+* **[Fix]** Important fix for bugs that affect main function.  Highly recommand update to this version.
+
+### Latest Change
+**v20150818**
+* [New] Long press F10 for FastABT Mode.  _(Thanks to [KylinWu](https://github.com/KylinWu))_
+* [New] Configurable settings for FastABT long press delay (The default is to press 0.5s to active FastABT).  (FastABTDelay)
+* [New] Update Info Tooltip for FastABT Mode.
+
+### Recent Change
+**v20150817**
+> * [Update] Optimize ABT to lower the CPU usage.
+
+**v20150816**
+> * [Update] Optimize pole check.  _(Thanks to [KylinWu](https://github.com/KylinWu))_
+
+**v20150815**
+> * [Update] Optimize Tooltip refreshing.
+
+Older changelog please visit [commit history](https://github.com/howar31/Trove-AHK-AutoFish/commits/master).
 
 ## Feature
 * Using **Memory Address** to detect biting.
@@ -108,6 +134,7 @@ Here are the default hotkey settings:
 
 * **F11** - Toggle Auto Fish on or off
 * **F10** - Toggle Auto Boot Throw on or off
+ * **Hold F10** to activate Fast Auto Boot Throw which will temporarily throw boot at high speed.
 * **F9** - Toggle Anti-AFK on or off
 * **F8** - Toggle Info tooltips on or off
 * **F6** - Terminate and exit the whole script
@@ -121,7 +148,33 @@ All hotkeys info are also displayed in tooltip.
 
 ![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
 
-## 特色
+## 更新紀錄
+請參考 GitHub repo 上的 [commit 紀錄](https://github.com/howar31/Trove-AHK-AutoFish/commits/master) 內有完整的更新紀錄。
+
+以下用到的標籤說明:
+* **[新增]** 版本中新增加的全新功能。
+* **[更新]** 腳本優化或是微幅調整，改進腳本整體效能但不影響主要功能。
+* **[修正]** 重要的功能修正，強烈建議更新到這個版本。
+
+### 最新更新
+**v20150818**
+* [新增] 長按 F10 啟動高速丟鞋模式。  _(感謝 [KylinWu](https://github.com/KylinWu))_
+* [新增] 可自訂的高速丟鞋長按延遲設定 (預設長按0.5秒啟動)。  (FastABTDelay)
+* [新增] 更新資訊浮動視窗的高速丟鞋相關訊息。
+
+### 近期更新
+**v20150817**
+> * [更新] 優化自動丟鞋以降低 CPU 使用率。
+
+**v20150816**
+> * [更新] 優化魚餌上鉤檢查機制。  _(感謝 [KylinWu](https://github.com/KylinWu))_
+
+**v20150815**
+> * [更新] 優化資訊浮動視窗更新機制。
+
+更舊的更新內容請參考 [commit 紀錄](https://github.com/howar31/Trove-AHK-AutoFish/commits/master)。
+
+## 功能特色
 * 使用 **記憶體位置** 偵測是否有魚上鉤
 > 使用記憶體偵測的方式非常精準，比圖片比對或聲音偵測的釣魚方式還要更好。
 
@@ -223,6 +276,7 @@ All hotkeys info are also displayed in tooltip.
 
 * **F11** - 切換自動釣魚開啟或關閉
 * **F10** - 切換自動丟鞋開啟或關閉
+ * **長按 F10** 可以啟動高速丟鞋模式，用於臨時手動快速丟鞋。
 * **F9** - 切換防斷線機制開啟或關閉
 * **F8** - 切換資訊浮動視窗顯示或隱藏
 * **F6** - 結束並完全關閉整個腳本
