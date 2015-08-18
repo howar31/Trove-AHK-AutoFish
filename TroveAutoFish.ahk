@@ -1,4 +1,4 @@
-#WinActivateForce
+﻿#WinActivateForce
 ; Script config. Do NOT change value here, might working inproperly!
 global Version := "v20150817"	; The version number of this script
 global FishAddress := "0x00966B98"	; The memory address for fishing
@@ -115,7 +115,7 @@ AutoFish:
 			; caught nothing, wait 1 second and continue checking
 			Sleep, 1000
 			
-			if (FishingTimeCount++ > 20)	; If waiting time is over 35 seconds, it must be a miss or someting wrong.  Re-cast.
+			if (FishingTimeCount++ > 20)	; If waiting time is over 35 seconds, it must be a miss or something wrong.  Re-cast.
 				break
 				
 		}
@@ -123,12 +123,23 @@ AutoFish:
 Return
 
 L_AutoBoot:	; Toggle auto boot throw
-	if (Flag_ABT) {
-		SetTimer, AutoBootThrow, Off
-		Flag_ABT := false
+	KeyWait, %HK_AutoBoot%, T0.5    ;Detect how long HK_AutoBoot has been pressed. Set 0.5 second
+	if (errorlevel) {
+		loop{
+			if(!GetKeyState(HK_AutoBoot, "P"))
+				Break
+			Gosub, AutoBootThrow
+			Random, Wait, 10, 50 ; Wait a few milliseconds
+			Sleep, %Wait%
+		}
 	} else {
-		SetTimer, AutoBootThrow, %Interval_Boot%
-		Flag_ABT := true
+		if (Flag_ABT) {
+			SetTimer, AutoBootThrow, Off
+			Flag_ABT := false
+		} else {
+			SetTimer, AutoBootThrow, %Interval_Boot%
+			Flag_ABT := true
+		}
 	}
 	UpdateTooltip()
 Return
@@ -163,8 +174,12 @@ ExitApp
 AutoBootThrow:
 	Imagesearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *70 %BootImgPath%
 	if (errorlevel = 0) {
-		Random, DragSpeed, 2, 9	; Throw naturally
-		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY%, %DragSpeed%
+		if(GetKeyState(HK_AutoBoot, "P")){
+			DragSpeed = 2
+		} else {
+			Random, DragSpeed, 2, 9	; Throw naturally
+		}
+		MouseClickDrag, Left, %FoundX%, %FoundY%, FoundX-450, %FoundY% ,%DragSpeed%
 	}
 Return
 
