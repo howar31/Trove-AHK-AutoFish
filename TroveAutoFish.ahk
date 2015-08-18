@@ -137,14 +137,15 @@ L_AutoBoot:	; Toggle auto boot throw
 	} else {
 		if (Flag_ABT) {
 			Flag_ABT := false
+			UpdateTooltip()
 			SetTimer, AutoBootThrow, Off
 		} else {
 			Flag_ABT := true
+			UpdateTooltip()
 			Gosub, AutoBootThrow
 			SetTimer, AutoBootThrow, %Interval_Boot%
 		}
 	}
-	UpdateTooltip()
 Return
 
 L_AntiAFK:	; Anti-AFK
@@ -278,15 +279,17 @@ UpdateTooltip() {
 	} else if (Flag_Fishing) {
 		Info_Fish := "`n[" . HK_AutoFish . "] Auto Fishing is ON."
 	}
-	if (!Flag_ABT) {
-		if (GetKeyState(HK_AutoBoot, "P")) {
-			Info_Boot := "`n[FAST] Auto Boot Throw is ON."
-		} else {
-			Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is OFF."
+
+	if (GetKeyState(HK_AutoBoot, "P")) {
+		Info_Boot := "`n[FAST] Auto Boot Throw is ON."
+	} else {
+		if (!Flag_ABT) {
+				Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is OFF."
+		} else if (Flag_ABT) {
+			Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is ON."
 		}
-	} else if (Flag_ABT) {
-		Info_Boot := "`n[" . HK_AutoBoot . "] Auto Boot Throw is ON."
 	}
+
 	if (!Flag_AFK) {
 		Info_AFK := "`n[" . HK_AntiAFK . "] Anti-AFK is OFF."
 	} else if (Flag_AFK) {
