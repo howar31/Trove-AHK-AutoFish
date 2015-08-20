@@ -40,6 +40,18 @@ Older changelog please visit [commit history](https://github.com/howar31/Trove-A
 >
 > You can start/stop auto fishing at any time without exiting the whole script.
 >
+> Auto Fish will cast and reel in automatically with some useful mechanisms:
+>
+> * Automatically open your backpack to prevent camera rotate by mousemove.  And also for ABT ImageSearch.
+>  * Auto Fish will close and re-open your backpack periodically to reset item rotation in backpack.
+>  * ABT is a standalone mechanism which you have to activate it individually.
+> 
+> * Sent Anti-AFK signal to prevent disconnection.
+>  * This signal is seperated from the Anti-AFK mechanism.  It will be triggered automatically by Auto Fish.  You don't need to activate Anti-AFK manually.
+>
+> * Auto Fish will wait 15 seconds first then start detecting the biting.  And auto re-cast if nothing happened after 35 seconds.
+>  * According to the Wiki, fish will bite between 20 to 30 seconds.  To lower CPU usage, we only need to check bite after 15 seconds.  Also assume there's error if no bite after 35 seconds and automatically re-cast.
+>
 > Auto fishing can be minimized and run in the background to automatically fishing for you without interfearence your current work.  That is, you can use your computer while Trove is fishing in your taskbar.
 >
 > Note that Auto Fish contain Anti-AFK functionality.  You do not need to enable Anti-AFK seperately.
@@ -184,6 +196,18 @@ All hotkeys info are also displayed in tooltip.
 > 按 **F11** 可切換自動釣魚功能的開關。
 >
 > 你不需要關閉整個腳本就可以隨時切換自動釣魚功能啟用與否。
+>
+> 自動釣魚會自行拋竿與收竿，同時包含一些實用的功能機制:
+>
+> * 自動開啟背包防止滑鼠旋轉視角，同時提供自動丟鞋圖片比對使用。
+>  * 自動釣魚會定時關閉並重開背包，以重置背包物品旋轉狀態。
+>  * 自動丟鞋是獨立的功能，必需要額外開啟。
+> 
+> * 傳送防斷線訊號防止閒置斷線。
+>  * 這個訊號跟後面提到的防斷線機制是完全獨立的不同功能，自動釣魚會自己發送自己的防斷線訊號，不需要另外去開啟防斷線機制。
+>
+> * 自動釣魚會先休眠15秒後才開始偵測是否有魚上鉤，而若35秒後仍毫無反應，則會自動重新拋竿。
+>  * 根據維基說明，魚會在20到30秒期間上鉤，因此為了降低CPU使用率，腳本會自動休眠15秒後才開始檢查魚餌狀態，同時若超過35秒仍沒有反應，則自動判定發生錯誤，自動進行重新拋竿。
 >
 > 自動釣魚完全不影響你使用電腦，可以自動在背景釣魚，也就是說，你可以把 Trove 縮小在工作列釣魚，然後用電腦做其他事情。
 >
