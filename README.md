@@ -164,7 +164,7 @@ All hotkeys info are also displayed in tooltip.
 
 ![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
 
-_2015/09/08 編輯: 我已經在 2015/08/26 離開 Trove ，因此我不會再更新這個腳本，但你仍然可以按照腳本內的註解自行修改並更新腳本。
+_2015/09/08 編輯: 我已經在 2015/08/26 離開 Trove ，因此我不會再更新這個腳本，但你仍然可以按照腳本內的註解自行修改並更新腳本。_
 
 ## 更新紀錄
 請參考 GitHub repo 上的 [commit 紀錄](https://github.com/howar31/Trove-AHK-AutoFish/commits/master) 內有完整的更新紀錄。
