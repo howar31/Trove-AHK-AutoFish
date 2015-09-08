@@ -5,6 +5,8 @@ This is an AutoHotKey script for auto fishing in Trove.
 
 ![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
 
+_2015/09/08 edit: Since I've quit Trove on 26th Aug, 2015, I will not update this script anymore.  You may update the script manually by editing the variables in the script file with the comments inside._
+
 ## Changelog
 You may check the [commit history](https://github.com/howar31/Trove-AHK-AutoFish/commits/master) for full changelog on this GitHub repo.
 
@@ -161,6 +163,8 @@ All hotkeys info are also displayed in tooltip.
 這是 Trove 自動釣魚的 AutoHotKey 腳本。
 
 ![previewimg](https://raw.githubusercontent.com/howar31/Trove-AHK-AutoFish/master/preview.png "Trove-AHK-AutoFish Preview Screenshot")
+
+_2015/09/08 編輯: 我已經在 2015/08/26 離開 Trove ，因此我不會再更新這個腳本，但你仍然可以按照腳本內的註解自行修改並更新腳本。
 
 ## 更新紀錄
 請參考 GitHub repo 上的 [commit 紀錄](https://github.com/howar31/Trove-AHK-AutoFish/commits/master) 內有完整的更新紀錄。
